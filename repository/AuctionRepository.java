@@ -1,3 +1,4 @@
-interface AuctionRepository{
-    public Optional
+public interface AuctionRepository {
+    Auction findById(Long id);
+    void save(Auction auction);
 }
