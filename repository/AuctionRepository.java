@@ -1,0 +1,3 @@
+interface AuctionRepository{
+    public Optional
+}
