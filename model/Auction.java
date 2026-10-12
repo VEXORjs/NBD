@@ -1,6 +1,7 @@
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.time.LocalDateTime;
 
 public class Auction {
 
@@ -8,12 +9,16 @@ public class Auction {
     private final String title;
     private BigDecimal currentPrice;
     private final List<Bid> bids;
+    private final LocalDateTime startTime;
+    private final LocalDateTime endTime;
 
-    public Auction(Long id, String title, BigDecimal currentPrice, List<Bid> bids) {
+    public Auction(Long id, String title, BigDecimal currentPrice, List<Bid> bids, LocalDateTime startDate, LocalDateTime endDate) {
         this.id = id;
         this.title = title;
         this.currentPrice = currentPrice;
         this.bids = new ArrayList<>(bids);
+        this.startTime = startDate;
+        this.endTime = endDate;
     }
 
     public Long getId() {
@@ -32,12 +37,16 @@ public class Auction {
         return bids;
     }
 
-    public void placeBid(Money bidAmount, BuyerId buyerid, LocalDateTime now){
+    public LocalDateTime getStartDate() { return startDate; }
+
+    public LocalDateTime getEndDate() { return endDate; }
+
+    public void placeBid(BigDecimal bidAmount, Long buyerid, LocalDateTime now){
         if (now.isBefore(startDate) || now.isAfter(endDate)){
             throw new IllegalArgumentException("Aukcja nie jest w tym momencie aktywna");
         }
 
-        if (!bidAmount.isGreaterThan(currentPrice)){
+        if (bidAmount.compareTo(currentPrice) <= 0){
             throw new IllegalArgumentException("Oferta musi byc wyzsza nic obecna cena");
         }
 

@@ -1,27 +1,35 @@
 public abstract class User {
+    private final Long id;
     private String username;
-    private boolean IsArchived;
+    private boolean isArchived;
 
-    public User(String username, boolean IsArchived) {
+    public User(String username, boolean isArchived) {
         this.username = username;
-        this.IsArchived = IsArchived;
+        this.isArchived = isArchived;
     }
+    public Long getId() { return id; }
+
     public String getUsername(){
         return username;
     }
+
     public void setUsername(String username){
         this.username = username;
     }
+
     public boolean getIsArchived(){
-        return IsArchived;
+        return isArchived;
     }
-    public void setIsArchived(boolean IsArchived){
-        this.IsArchived = IsArchived;
+
+    public void setIsArchived(boolean isArchived){
+        this.isArchived = isArchived;
     }
+
     public void unarchive(){
-        IsArchived = false;
+        isArchived = false;
     };
+
     public void archive(){
-        IsArchived = true;
+        isArchived = true;
     };
 }
