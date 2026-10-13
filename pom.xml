@@ -1,14 +1,35 @@
-<dependencies>
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-    <dependency>
-        <groupId>org.hibernate.orm</groupId>
-        <artifactId>hibernate-core</artifactId>
-        <version>6.4.4.Final</version>
-    </dependency>
+    <!-- Podstawowe dane Twojego projektu -->
+    <groupId>pl.lodz.p</groupId>
+    <artifactId>auction-system</artifactId>
+    <version>1.0-SNAPSHOT</version>
 
-    <dependency>
-        <groupId>org.postgresql</groupId>
-        <artifactId>postgresql</artifactId>
-        <version>42.7.2</version>
-    </dependency>
-</dependencies>
+    <properties>
+        <!-- Ustawiamy Javę na wersję minimum 17, ponieważ używasz nowszych funkcji (np. instanceof Buyer buyer) -->
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+        <!-- Hibernate ORM (Dostarcza mechanizmy JPA oraz adnotacje @Entity, @Table, itp.) -->
+        <dependency>
+            <groupId>org.hibernate.orm</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>6.4.4.Final</version>
+        </dependency>
+
+        <!-- Sterownik PostgreSQL (Pozwala aplikacji połączyć się z Twoją bazą w Dockerze) -->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.7.2</version>
+        </dependency>
+    </dependencies>
+
+</project>
