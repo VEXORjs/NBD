@@ -19,8 +19,4 @@ public class Buyer extends User {
     public boolean canBid(float newBidBalance) {
         return this.balance >= newBidBalance;
     }
-
-    public String getInfo() {
-        return "Kupujący: " + getUsername() + ", Saldo: " + balance;
-    }
 }

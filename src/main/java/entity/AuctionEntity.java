@@ -1,8 +1,9 @@
-package adapter;
+package entity;
 
 import jakarta.persistence.*;
 import model.Auction;
 import model.Bid;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -42,7 +43,7 @@ public class AuctionEntity {
                 .map(b -> new Bid(b.getId(), b.getBuyerId(), b.getAmount(), b.getTime()))
                 .collect(Collectors.toList());
 
-        return new Auction(this.id, this.version, this.title, this.currentPrice, domainBids, this.startDate, this.endDate);
+        return new Auction(this.id, this.currentPrice, domainBids, this.startDate, this.endDate, this.version);
     }
 
 
@@ -53,11 +54,10 @@ public class AuctionEntity {
 
         AuctionEntity entity = new AuctionEntity();
         entity.setId(auction.getId());
-        entity.setVersion(auction.getVersion());
-        entity.setTitle(auction.getTitle());
         entity.setCurrentPrice(auction.getCurrentPrice());
         entity.setStartDate(auction.getStartDate());
         entity.setEndDate(auction.getEndDate());
+        entity.setVersion(auction.getVersion());
 
         if (auction.getBids() != null) {
             entity.setBids(auction.getBids().stream()

@@ -1,4 +1,4 @@
-package adapter;
+package entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -12,17 +12,22 @@ public class BuyerEntity extends UserEntity {
     @Column(name = "balance")
     private float balance;
 
-    @Column(name = "delivery_address")
-    private String deliveryAddress;
-
     public BuyerEntity() {}
 
     @Override
     public Buyer toDomain() {
-        return new Buyer(this.getId(), this.getUsername(), this.isArchived(), this.balance);
+        return new Buyer(
+                this.getId(),
+                this.getUsername(),
+                this.isArchived(),
+                this.balance);
     }
 
     public static BuyerEntity fromDomain(Buyer buyer) {
+        if (buyer == null) {
+            return null;
+        }
+
         BuyerEntity entity = new BuyerEntity();
         entity.setId(buyer.getId());
         entity.setUsername(buyer.getUsername());
@@ -31,9 +36,12 @@ public class BuyerEntity extends UserEntity {
         return entity;
     }
 
-    public float getBalance() { return balance; }
-    public void setBalance(float balance) { this.balance = balance; }
+    public float getBalance() {
+        return balance;
+    }
 
-    public String getDeliveryAddress() { return deliveryAddress; }
-    public void setDeliveryAddress(String deliveryAddress) { this.deliveryAddress = deliveryAddress; }
-}
+    public void setBalance(float balance) {
+        this.balance = balance;
+    }
+
+    }

@@ -8,10 +8,11 @@
 
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
-        <class>adapter.UserEntity</class>
-        <class>adapter.BuyerEntity</class>
-        <class>adapter.AuctionEntity</class>
-        <class>adapter.BidEntity</class>
+        <class>entity.UserEntity</class>
+        <class>entity.BuyerEntity</class>
+        <class>entity.SellerEntity</class>
+        <class>entity.AuctionEntity</class>
+        <class>entity.BidEntity</class>
 
         <properties>
             <property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver" />

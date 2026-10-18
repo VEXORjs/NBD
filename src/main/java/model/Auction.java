@@ -6,21 +6,20 @@ import java.util.List;
 
 public class Auction {
     private Long id;
-    private Long version;
-    private String title;
     private BigDecimal currentPrice;
     private List<Bid> bids;
     private LocalDateTime startDate;
     private LocalDateTime endDate;
 
-    public Auction(Long id, Long version, String title, BigDecimal currentPrice, List<Bid> bids, LocalDateTime startDate, LocalDateTime endDate) {
+    private Long version;
+
+    public Auction(Long id, BigDecimal currentPrice, List<Bid> bids, LocalDateTime startDate, LocalDateTime endDate, Long version) {
         this.id = id;
-        this.version = version;
-        this.title = title;
         this.currentPrice = currentPrice;
         this.bids = bids;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.version = version;
     }
 
     public void placeBid(BigDecimal bidAmount, Long buyerId, LocalDateTime now) {
@@ -40,13 +39,9 @@ public class Auction {
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
-
-    public Long getVersion() { return version; }
-    public void setVersion(Long version) { this.version = version; }
-
-    public String getTitle() { return title; }
     public BigDecimal getCurrentPrice() { return currentPrice; }
     public List<Bid> getBids() { return bids; }
     public LocalDateTime getStartDate() { return startDate; }
     public LocalDateTime getEndDate() { return endDate; }
+    public Long getVersion() { return version; }
 }

@@ -3,8 +3,10 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import model.Auction;
 import model.Buyer;
-import repository.JpaAuctionRepositoryAdapter;
-import repository.JpaUserRepositoryAdapter;
+import adapter.JpaAuctionRepositoryAdapter;
+import adapter.JpaUserRepositoryAdapter;
+import repository.AuctionEntityRepository;
+import repository.UserEntityRepository;
 import service.AuctionService;
 
 import java.math.BigDecimal;
@@ -19,9 +21,13 @@ public class Main {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("default");
         EntityManager em = emf.createEntityManager();
 
-        // 2. Utworzenie instancji adapterów (warstwa infrastruktury)
-        JpaUserRepositoryAdapter userRepository = new JpaUserRepositoryAdapter(em);
-        JpaAuctionRepositoryAdapter auctionRepository = new JpaAuctionRepositoryAdapter(em);
+        // 2a. Utworzenie warstwy Repo (operującej na EntityManagerze i encjach)
+        UserEntityRepository userEntityRepo = new UserEntityRepository(em);
+        AuctionEntityRepository auctionEntityRepo = new AuctionEntityRepository(em);
+
+        // 2b. Utworzenie warstwy Adapterów (wstrzykujemy do nich Repo)
+        JpaUserRepositoryAdapter userRepository = new JpaUserRepositoryAdapter(userEntityRepo);
+        JpaAuctionRepositoryAdapter auctionRepository = new JpaAuctionRepositoryAdapter(auctionEntityRepo);
 
         // 3. Utworzenie serwisów aplikacyjnych
         AuctionService auctionService = new AuctionService(auctionRepository, em);
@@ -38,7 +44,7 @@ public class Main {
             // Tworzymy czysty obiekt domenowy Aukcji
             LocalDateTime start = LocalDateTime.now().minusDays(1);
             LocalDateTime end = LocalDateTime.now().plusDays(7);
-            Auction auction = new Auction(null,null, "Laptop Dell", new BigDecimal("2500.00"), new ArrayList<>(), start, end);
+            Auction auction = new Auction(null, new BigDecimal("2500.00"), new ArrayList<>(), start, end, null);
             auctionRepository.save(auction);
 
             // Zatwierdzamy zapis początkowy do bazy

@@ -1,4 +1,4 @@
-package repository;
+package interfaces;
 
 import model.Auction;
 import java.util.Optional;

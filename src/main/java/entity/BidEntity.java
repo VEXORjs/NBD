@@ -1,6 +1,8 @@
-package adapter;
+package entity;
 
 import jakarta.persistence.*;
+import model.Bid;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
@@ -27,8 +29,27 @@ public class BidEntity {
 
     public BidEntity() {}
 
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    public static BidEntity fromDomain(Bid bid, AuctionEntity auctionEntity) {
+        if (bid == null) {
+            return null;
+        }
+
+        BidEntity entity = new BidEntity();
+        entity.setId(bid.getId());
+        entity.setAmount(bid.getAmount());
+        entity.setBuyerId(bid.getBuyerId());
+        entity.setTime(bid.getTime());
+        entity.setAuction(auctionEntity);
+        return entity;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public BigDecimal getAmount() { return amount; }
     public void setAmount(BigDecimal amount) { this.amount = amount; }

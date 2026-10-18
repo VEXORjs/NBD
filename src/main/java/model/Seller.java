@@ -16,8 +16,4 @@ public class Seller extends User {
     public void setBankAccountNumber(String bankAccountNumber) {
         this.bankAccountNumber = bankAccountNumber;
     }
-
-    public String getInfo() {
-        return "Sprzedawca: " + getUsername() + ", Numer konta: " + bankAccountNumber;
-    }
 }

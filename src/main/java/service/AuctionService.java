@@ -4,7 +4,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.OptimisticLockException;
 import model.Auction;
-import repository.AuctionRepository;
+import interfaces.AuctionRepository;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
